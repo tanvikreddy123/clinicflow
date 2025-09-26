@@ -1,0 +1,33 @@
+# Node.js
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Environment files
+.env
+.env.*
+
+# OS
+.DS_Store
+
+# IDE/editor
+.vscode/
+.idea/
+
+# Logs
+*.log
+
+# React Native
+*.keystore
+*.hprof
+*.jsbundle
+metro-cache/
+
+# iOS
+ios/Pods/
+DerivedData/
+build/
+
+# Android
+android/.gradle/
+android/app/build/
