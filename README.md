@@ -138,13 +138,12 @@ clinicflow/
 ---
 
 ### License & Usage Notice
-
-This repository is provided for **portfolio and demonstration purposes only**.  
-All code is copyrighted © 2025 Tanvik Reddy Kotha.  
-Use, copying, or redistribution of this project (in full or in part) for commercial purposes is **not permitted without explicit permission**.  
+This project is licensed under a **Proprietary License**.  
+It is provided for portfolio and demonstration purposes only.  
 
 [See full LICENSE](./LICENSE)
 
+---
 
 ### Notes
 
