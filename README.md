@@ -137,6 +137,15 @@ clinicflow/
 
 ---
 
+### License & Usage Notice
+
+This repository is provided for **portfolio and demonstration purposes only**.  
+All code is copyrighted © 2025 Tanvik Reddy Kotha.  
+Use, copying, or redistribution of this project (in full or in part) for commercial purposes is **not permitted without explicit permission**.  
+
+[See full LICENSE](./LICENSE)
+
+
 ### Notes
 
 -   Make sure a MongoDB instance is running locally or use a cloud service like MongoDB Atlas.
