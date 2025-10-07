@@ -1,0 +1,211 @@
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  background-color: #f4f7f6;
+  margin: 0;
+  padding: 20px;
+}
+
+.dashboard {
+  max-width: 1100px;
+  margin: 0 auto;
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.dashboard-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 10px;
+}
+.dashboard-header .title {
+  font-size: 24px;
+  font-weight: 700;
+  color: #333;
+}
+.toolbar { display: flex; align-items: center; gap: 10px; }
+.mr12 { margin-right: 12px; }
+.ml6 { margin-left: 6px; }
+
+.btn {
+  background: #111;
+  color: #fff;
+  border: 0;
+  border-radius: 6px;
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+.controls {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 12px;
+}
+.input {
+  flex: 1;
+  padding: 8px 10px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 14px;
+}
+.select {
+  padding: 8px 10px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  background: #fff;
+}
+.inline-check { display: inline-flex; align-items: center; gap: 6px; cursor: pointer; }
+
+.intake-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.intake-table th,
+.intake-table td {
+  padding: 12px 15px;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+}
+.intake-table th {
+  background-color: #fafafa;
+  font-weight: 600;
+}
+.intake-table tr.row-unreviewed {
+  background: #fffbf0;
+}
+
+.sortable { cursor: pointer; position: relative; user-select: none; }
+.sortable.asc:after,
+.sortable.desc:after {
+  content: '';
+  border: 4px solid transparent;
+  border-top-color: #999;
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-2px) rotate(180deg);
+}
+.sortable.asc:after { transform: translateY(-2px) rotate(0deg); }
+
+.badge {
+  display: inline-block;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: 10px;
+  font-size: 12px;
+}
+.badge-complete {
+  color: #0a6a0a;
+  background: #e7f6e7;
+  border: 1px solid #c9e8c9;
+}
+.badge-progress {
+  color: #b15a00;
+  background: #fff2e6;
+  border: 1px solid #ffd9b3;
+}
+.badge-unreviewed {
+  color: #8a5800;
+  background: #fff6d8;
+  border: 1px solid #ffe6a8;
+}
+.badge-reviewed {
+  color: #114488;
+  background: #e6f0ff;
+  border: 1px solid #cddfff;
+}
+
+.link {
+  background: none;
+  border: none;
+  color: #0b5bd3;
+  text-decoration: underline;
+  cursor: pointer;
+  padding: 0;
+  font: inherit;
+}
+.link.danger { color: #b72b2b; }
+
+.error {
+  background: #ffe9e9;
+  border: 1px solid #ffbcbc;
+  color: #8b0000;
+  padding: 10px 12px;
+  border-radius: 6px;
+  margin: 10px 0;
+}
+
+.empty {
+  background: #f9fbff;
+  border: 1px dashed #c9d7ff;
+  color: #304070;
+  padding: 16px;
+  border-radius: 8px;
+  margin: 12px 0 18px;
+}
+.empty .sub { margin-top: 6px; color: #667; }
+
+.actions { display: flex; flex-direction: column; gap: 4px; }
+.action-line { display: flex; align-items: center; gap: 10px; }
+
+.muted { color: #777; }
+.mono { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; }
+
+/* Modal */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 20;
+}
+.modal {
+  width: 720px;
+  max-width: calc(100vw - 32px);
+  background: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+}
+.modal-header,
+.modal-footer {
+  padding: 12px 16px;
+  border-bottom: 1px solid #eee;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.modal-footer {
+  border-top: 1px solid #eee;
+  border-bottom: 0;
+}
+.modal-title { font-weight: 700; }
+.close {
+  background: none; border: none; font-size: 20px; cursor: pointer;
+}
+.modal-body {
+  padding: 14px 16px;
+  max-height: 70vh;
+  overflow: auto;
+}
+.kv { display: flex; margin-bottom: 6px; }
+.k { width: 160px; color: #555; }
+.v { flex: 1; }
+.section { margin-top: 12px; }
+.section-title { font-weight: 600; margin-bottom: 6px; }
+.json {
+  background: #f6f8fa;
+  border: 1px solid #eee;
+  border-radius: 6px;
+  padding: 10px;
+  overflow: auto;
+  font-size: 12px;
+}
