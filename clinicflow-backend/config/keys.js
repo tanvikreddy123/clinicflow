@@ -5,6 +5,11 @@ module.exports = {
   googleProjectID: process.env.GOOGLE_PROJECT_ID,
   dialogflowAgentID: process.env.DIALOGFLOW_AGENT_ID,
   dialogflowLocation: process.env.DIALOGFLOW_LOCATION,
-  googleClientEmail: process.env.GOOGLE_CLIENT_EMAIL,
-  googlePrivateKey: process.env.GOOGLE_PRIVATE_KEY.replace(/\\n/g, '\n')
+
+  googleClientEmail: process.env.GOOGLE_CLIENT_EMAIL || '',
+  googlePrivateKey: process.env.GOOGLE_PRIVATE_KEY
+    ? process.env.GOOGLE_PRIVATE_KEY.replace(/\\n/g, '\n')
+    : '',
+
+  googleCredentialsJson: process.env.GOOGLE_CREDENTIALS_JSON || null,
 };

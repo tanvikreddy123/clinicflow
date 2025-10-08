@@ -1,18 +1,15 @@
 import axios from 'axios';
 
-// Automatically use Render backend for release build
-const isProd = process.env.NODE_ENV === 'production';
-const API_BASE = isProd
-  ? 'https://clinicflow-v75g.onrender.com'   // Render backend (live)
-  : 'http://10.0.2.2:5000';                  // Local backend (Android emulator)
-
+// Force production backend for release build
+const API_BASE = 'https://clinicflow-v75g.onrender.com'; // live backend 
 const API_URL = `${API_BASE}/api`;
 
-// Logs for debugging
+// for debugging
 axios.interceptors.request.use((config) => {
   console.log(`[AXIOS] ${config.method?.toUpperCase()} ${config.url}`, config.data || {});
   return config;
 });
+
 axios.interceptors.response.use(
   (resp) => {
     console.log(`[AXIOS] <- ${resp.status} ${resp.config.url}`, resp.data);
@@ -24,17 +21,19 @@ axios.interceptors.response.use(
   }
 );
 
-// API calls
+// Send message to the chatbot
 const sendMessage = async (message, sessionId) => {
   const { data } = await axios.post(`${API_URL}/chatbot/send`, { message, sessionId });
   return data;
 };
 
+// Health check
 const ping = async () => {
   const { data } = await axios.get(`${API_URL}/ping`);
   return data;
 };
 
+// Simple echo test
 const echo = async (payload) => {
   const { data } = await axios.post(`${API_URL}/echo`, payload);
   return data;

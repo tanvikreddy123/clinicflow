@@ -1,11 +1,16 @@
 const { SessionsClient } = require('@google-cloud/dialogflow-cx');
 const keys = require('../config/keys');
 
+// Load credentials directly from the Render environment
+const credentials = process.env.GOOGLE_CREDENTIALS_JSON
+  ? JSON.parse(process.env.GOOGLE_CREDENTIALS_JSON)
+  : {
+      client_email: keys.googleClientEmail,
+      private_key: keys.googlePrivateKey.replace(/\\n/g, '\n'),
+    };
+
 const sessionClient = new SessionsClient({
-  credentials: {
-    client_email: keys.googleClientEmail,
-    private_key: keys.googlePrivateKey.replace(/\\n/g, '\n'),
-  },
+  credentials,
   apiEndpoint: `${keys.dialogflowLocation}-dialogflow.googleapis.com`,
 });
 
@@ -20,7 +25,9 @@ function flattenParams(structFields = {}) {
     else if (v.listValue?.values) {
       out[k] = v.listValue.values.map(
         (x) =>
-          x.stringValue ?? x.numberValue ?? x.boolValue ??
+          x.stringValue ??
+          x.numberValue ??
+          x.boolValue ??
           (x.structValue?.fields ? flattenParams(x.structValue.fields) : null)
       );
     } else if (v.structValue?.fields) {
@@ -51,12 +58,10 @@ async function detectIntent(sessionId, query) {
   const [response] = await sessionClient.detectIntent(request);
   const result = response.queryResult || {};
 
-  // collect all text responses
   const responseTexts = (result.responseMessages || [])
     .filter((m) => m?.text?.text?.length)
     .flatMap((m) => m.text.text);
 
-  // figuring out if the bot reached an "end" state
   const pageName = result.currentPage?.displayName || '';
   const pageNameLc = pageName.toLowerCase();
 
