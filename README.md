@@ -1,134 +1,123 @@
-# ClinicFlow – AI-Powered Patient Intake System
+# 🤖 ClinicFlow – AI-Powered Patient Intake System
 
-A full-stack patient intake system where patients check in through a React Native AI chatbot, data flows into a Node.js/Express backend, and clinic staff can review everything in a React dashboard.
-
----
-
-### Features
-
--   **AI Chatbot (React Native):** Built on Google Dialogflow CX, the chatbot makes the check-in process conversational and easy to follow.
--   **Backend (Node/Express/MongoDB):** Securely stores patient intake data, manages the review workflow, and exposes RESTful API endpoints.
--   **Dashboard (React):** A dedicated portal for clinic staff to view, sort, filter, and mark patient intakes as reviewed.
--   **Real-Time Flow:** Patients check in via the chatbot → intake data is instantly synced to the backend → staff can review the new submission on the dashboard.
--   **Clean Architecture:** Built with a modular structure, featuring distinct services, Mongoose models, and a reusable API layer for maintainability.
+ClinicFlow is an AI-powered patient intake and triage platform that automates clinic check-ins. Patients interact with a conversational chatbot built in React Native, data flows securely through a Node.js + MongoDB backend, and staff manage submissions in a React web dashboard.
 
 ---
 
-### Tech Stack
+### 🚀 Live Deployment
+
+| Component              | Description                            | Deployment                                                                                                                                     | Status    |
+| :--------------------- | :------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------- | :-------- |
+| **Backend (API Server)** | Node.js + Express + MongoDB REST API   | [Live API on Render](https://clinicflow-v75g.onrender.com)                                                                                     | ✅ Live    |
+| **Dashboard (Web)**      | React dashboard for clinic staff       | [Live Dashboard on Vercel](https://clinicflow-dashboard.vercel.app/)                                                                           | ✅ Live    |
+| **Mobile App (Android)** | React Native chatbot (Dialogflow CX) | Distributed via Firebase App Distribution *(Private Tester Access – invite available on request)*                                                | 🔒 Private    |
+
+All three components are live and connected — the chatbot communicates with the production backend, and new check-ins instantly appear on the staff dashboard.
+
+---
+
+### ✨ Features
+
+-   **AI Chatbot (React Native):** Uses Google Dialogflow CX to handle patient check-ins through a conversational flow.
+-   **Backend (Node/Express/MongoDB):** Handles API requests, stores intake data, and connects to Dialogflow.
+-   **Dashboard (React):** A web panel for staff to review patient intakes, mark them as complete, or filter based on status.
+-   **Real-Time Data Flow:** Chatbot → Backend → Dashboard (synced automatically).
+-   **Modular Structure:** Clear separation between backend, app, and dashboard for easy maintenance and scaling.
+
+---
+
+### 🏗 Architecture Overview
+
+🤖 Patient (Mobile)  
+↓  
+📱 React Native Chatbot (Dialogflow CX)  
+↓ API requests  
+🌐 Express Backend (Node.js + MongoDB Atlas)  
+↑ REST APIs / WebSocket sync  
+💻 React Dashboard (for Clinic Staff)   
+
+---
+
+### 🧰Tech Stack
 
 #### **Backend** (`clinicflow-backend`)
 
 -   Node.js, Express
 -   MongoDB, Mongoose
 -   Dialogflow CX SDK (`@google-cloud/dialogflow-cx`)
--   Morgan (logging), UUID, dotenv
+-   Morgan, UUID, dotenv
 
 #### **Mobile App** (`ClinicFlowApp`)
 
 -   React Native
--   Axios (with interceptors for logging)
--   `Animated` + `KeyboardAvoidingView` for a smooth chat UI
--   Tested on Android (emulator & physical device), iOS setup possible with Xcode but not included here.
+-   Axios (with interceptors for API logging)
+-   `Animated` + `KeyboardAvoidingView` for smoother chat
+-   Tested on Android (emulator + real device)
+-   Released via Firebase App Distribution
 
 #### **Dashboard** (`clinicflow-dashboard`)
 
--   React (Create React App)
+-   React (CRA)
 -   Axios
--   Testing Library (Jest + React Testing Library)
+-   React Testing Library + Jest
+-   Deployed via Vercel
 
 ---
 
-### Quick Start (Local)
+### ⚙️ Running Locally
 
-1.  **Clone the repository**
+1.  **Clone the repo**
     ```bash
     git clone https://github.com/your-username/clinicflow.git
     cd clinicflow
     ```
 
-2.  **Backend (API Server)**
-    -   Navigate to the backend directory and install dependencies:
-        ```bash
-        cd clinicflow-backend
-        npm install
-        ```
-    -   Create a `.env` file in the `clinicflow-backend/` root:
-        ```env
-        PORT=5000
-        MONGO_URI=your_mongodb_connection_string
-        GOOGLE_PROJECT_ID=your_dialogflow_project_id
-        GOOGLE_CLIENT_EMAIL=your_service_account_email
-        GOOGLE_PRIVATE_KEY="your_private_key"
-        DIALOGFLOW_AGENT_ID=your_agent_id
-        DIALOGFLOW_LOCATION=us-central1
-        ```
-    -   Start the server:
-        ```bash
-        node server.js
-        # Server -> http://localhost:5000
-        ```
-
-3.  **Mobile App (React Native Chatbot)**
-    -   Make sure your Android Emulator (or a real device) is running.
-    -   Navigate to the app directory and install dependencies:
-        ```bash
-        cd ../ClinicFlowApp
-        npm install
-        ```
-    -   In one terminal, start the Metro bundler:
-        ```bash
-        npx react-native start --reset-cache
-        ```
-    -   In another terminal, install and launch the app on your emulator/device:
-        ```bash
-        npx react-native run-android
-        ```
-
-4.  **Dashboard (React Web App)**
-    -   Navigate to the dashboard directory and install dependencies:
-        ```bash
-        cd ../clinicflow-dashboard
-        npm install
-        ```
-    -   Start the React development server:
-        ```bash
-        npm start
-        # App -> http://localhost:3000
-        ```
-
----
-
-### Running the Full System
-
-To run everything together, you will typically need **4 separate terminals**:
-
-1.  **Backend API**
+2.  **Backend setup**
     ```bash
     cd clinicflow-backend
+    npm install
+    ```
+    Create `.env`:
+    ```env
+    PORT=5000
+    MONGO_URI=your_mongodb_connection_string
+    GOOGLE_PROJECT_ID=your_dialogflow_project_id
+    GOOGLE_CLIENT_EMAIL=your_service_account_email
+    GOOGLE_PRIVATE_KEY="your_private_key"
+    DIALOGFLOW_AGENT_ID=your_agent_id
+    DIALOGFLOW_LOCATION=us-central1
+    ```
+    Start server:
+    ```bash
     node server.js
+    # http://localhost:5000
     ```
 
-2.  **React Native Metro Bundler**
+3.  **React Native App**
     ```bash
-    cd ClinicFlowApp
+    cd ../ClinicFlowApp
+    npm install
+    ```
+    In one terminal, start Metro:
+    ```bash
     npx react-native start --reset-cache
     ```
-
-3.  **React Native App Runner**
+    In another terminal, run the app:
     ```bash
-    cd ClinicFlowApp
     npx react-native run-android
-    ```
+    ``` 
 
-4.  **React Dashboard**
+4.  **Dashboard**
     ```bash
-    cd clinicflow-dashboard
+    cd ../clinicflow-dashboard
+    npm install
     npm start
+    # http://localhost:3000
     ```
 
 ---
 
-### Folder Structure
+### 🗂 Folder Structure
 
 clinicflow/  
 ├── clinicflow-backend/    # Node.js + Express + MongoDB backend  
@@ -137,20 +126,29 @@ clinicflow/
 
 ---
 
-### License & Usage Notice
+### 📜 License & Usage Notice
 This project is licensed under a **Proprietary License**.  
-It is provided for portfolio and demonstration purposes only.  
+It is provided for production-ready demonstration purposes only.  
 
 [See full LICENSE](./LICENSE)
 
 ---
 
-### Notes
+### 🔒 Environment & Security
 
--   Make sure a MongoDB instance is running locally or use a cloud service like MongoDB Atlas.
--   The backend requires Google Cloud credentials for a service account with Dialogflow API access. These should be provided in the `.env` file.
--   The mobile app is configured for Android. Use Android Studio to set up an emulator or connect a physical device.
+ClinicFlow follows standard production security practices:
+
+-   Firebase, Google Cloud, and MongoDB credentials are securely managed via environment variables.
+-   Sensitive files like `google-services.json` are excluded from version control.
+-   API keys and private keys are never exposed in builds or repositories.
+-   The backend connects to Dialogflow CX using a service account with restricted access scope.
 
 ---
 
-*Project by Tanvik Reddy Kotha*
+### 👨‍💻 Author & Credits
+
+**Tanvik Reddy Kotha**  
+*Full-Stack Developer | AI & Cloud Enthusiast*  
+
+Email ID: tanvikreddy123@gmail.com  
+🔗 [LinkedIn](https://www.linkedin.com/in/tanvikreddy/) · [GitHub](https://github.com/tanvikreddy123)
