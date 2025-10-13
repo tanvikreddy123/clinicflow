@@ -14,6 +14,7 @@ app.use(
     origin: [
       'http://localhost:3000',
       'https://clinicflow-dashboard.vercel.app',
+      'https://clinicflow-dashboard-iuj1xai73-tanvikreddy123-5701s-projects.vercel.app',
     ],
     methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
     credentials: true,
