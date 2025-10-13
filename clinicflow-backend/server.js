@@ -7,26 +7,25 @@ const keys = require('./config/keys');
 
 const app = express();
 
+// Middleware
 app.use(morgan('dev'));
 app.use(bodyParser.json());
-
 app.use(
   cors({
     origin: [
-      'http://localhost:3000', 
-      'https://clinicflow-dashboard.vercel.app'
+      'http://localhost:3000',
+      'https://clinicflow-dashboard.vercel.app',
     ],
-    methods: ['GET', 'POST', 'PATCH', 'OPTIONS'],
+    methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
     credentials: true,
   })
 );
 
 // MongoDB connection
-const db = keys.mongoURI;
 mongoose
-  .connect(db /* , { useNewUrlParser: true, useUnifiedTopology: true } */)
-  .then(() => console.log('MongoDB Connected...'))
-  .catch(err => console.log(err));
+  .connect(keys.mongoURI)
+  .then(() => console.log('✅ MongoDB Connected...'))
+  .catch(err => console.error('❌ MongoDB Error:', err));
 
 // Routes
 app.use('/api', require('./routes/api'));
@@ -36,4 +35,4 @@ app.get('/ping', (req, res) => res.json({ ok: true, ts: Date.now() }));
 
 // Start server
 const port = process.env.PORT || 5000;
-app.listen(port, () => console.log(`Server started on port ${port}`));
+app.listen(port, () => console.log(`🚀 Server running on port ${port}`));
