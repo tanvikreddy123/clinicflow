@@ -7,7 +7,6 @@ const keys = require('./config/keys');
 
 const app = express();
 
-// Middleware
 app.use(morgan('dev'));
 app.use(bodyParser.json());
 app.use(
@@ -21,18 +20,18 @@ app.use(
   })
 );
 
-// MongoDB connection
 mongoose
   .connect(keys.mongoURI)
   .then(() => console.log('✅ MongoDB Connected...'))
   .catch(err => console.error('❌ MongoDB Error:', err));
 
-// Routes
 app.use('/api', require('./routes/api'));
 
-// Health check
 app.get('/ping', (req, res) => res.json({ ok: true, ts: Date.now() }));
 
-// Start server
+app.get('/', (req, res) => {
+  res.send('✅ ClinicFlow Backend is Live and Running!');
+});
+
 const port = process.env.PORT || 5000;
 app.listen(port, () => console.log(`🚀 Server running on port ${port}`));
